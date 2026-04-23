@@ -59,14 +59,14 @@ void* count_up(void* argp)
 void* count_down(void* argp)
 {
      int T = (*(struct args*)argp).T;
-     sem_wait(&s);
+     sem_wait(&lock);
      while(val > 0) {
          val--;
          acc_down++;
-         sem_post(&s);
+         sem_post(&lock);
          if(T){usleep(T);}
-         sem_wait(&s);
+         sem_wait(&lock);
      }
-     sem_post(&s);
+     sem_post(&lock);
      return NULL;
 }
